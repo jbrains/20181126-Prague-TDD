@@ -1,0 +1,19 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+group 'ca.jbrains'
+version '0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.codehaus.groovy:groovy-all:2.5.3"
+    testCompile "org.spockframework:spock-core:1.2-groovy-2.5"
+    testCompile "junit:junit:4.12"
+}
