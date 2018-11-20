@@ -1,5 +1,6 @@
 package ca.jbrains.pos.test;
 
+import ca.jbrains.pos.Catalog;
 import ca.jbrains.pos.Price;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class FindPriceInMemoryCatalogTest {
         Assert.assertEquals(null, catalog.findPrice("::missing barcode::"));
     }
 
-    public static class InMemoryCatalog {
+    public static class InMemoryCatalog implements Catalog {
         private final Map<String, Price> pricesByBarcode;
 
         public InMemoryCatalog(Map<String, Price> pricesByBarcode) {
