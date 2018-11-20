@@ -68,12 +68,6 @@ public class SellOneItemControllerTest {
         }
     }
 
-    public static class Price {
-        public static Price euroCents(int euroCentsValue) {
-            return new Price();
-        }
-    }
-
     public interface Catalog {
         Price findPrice(String barcode);
     }
