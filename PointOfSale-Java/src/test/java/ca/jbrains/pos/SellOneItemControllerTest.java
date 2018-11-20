@@ -9,12 +9,16 @@ public class SellOneItemControllerTest {
         Catalog catalog = Mockito.mock(Catalog.class);
         Display display = Mockito.mock(Display.class);
 
-        Price matchingPrice = Price.euroCents(795);
-        Mockito.when(catalog.findPrice("12345")).thenReturn(matchingPrice);
+        Price matchingPrice = anyValidPrice();
+        Mockito.when(catalog.findPrice("::barcode::")).thenReturn(matchingPrice);
 
-        new SellOneItemController(catalog, display).onBarcode("12345");
+        new SellOneItemController(catalog, display).onBarcode("::barcode::");
 
         Mockito.verify(display).displayPrice(matchingPrice);
+    }
+
+    private Price anyValidPrice() {
+        return Price.euroCents(795);
     }
 
     @Test
