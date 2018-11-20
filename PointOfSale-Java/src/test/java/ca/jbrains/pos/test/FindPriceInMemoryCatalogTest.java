@@ -9,15 +9,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FindPriceInMemoryCatalogTest {
-    @Test
-    public void productFound() throws Exception {
-        Price matchingPrice = Price.euroCents(795);
-        Catalog catalog = catalogWith("::barcode::", matchingPrice);
-        Assert.assertEquals(matchingPrice, catalog.findPrice("::barcode::"));
-    }
+public class FindPriceInMemoryCatalogTest extends FindPriceInCatalogContract {
 
-    private Catalog catalogWith(String barcode, Price matchingPrice) {
+    @Override
+    protected Catalog catalogWith(String barcode, Price matchingPrice) {
         return new InMemoryCatalog(new HashMap<String, Price>() {{
             put("not " + barcode, Price.euroCents(0));
             put(barcode, matchingPrice);
@@ -26,13 +21,8 @@ public class FindPriceInMemoryCatalogTest {
         }});
     }
 
-    @Test
-    public void productNotFound() throws Exception {
-        Catalog catalog = catalogWithout("::missing barcode::");
-        Assert.assertEquals(null, catalog.findPrice("::missing barcode::"));
-    }
-
-    private Catalog catalogWithout(String barcodeToAvoid) {
+    @Override
+    protected Catalog catalogWithout(String barcodeToAvoid) {
         return new InMemoryCatalog(new HashMap<String, Price>() {{
             put("not " + barcodeToAvoid, Price.euroCents(0));
             put("certainly not " + barcodeToAvoid, Price.euroCents(0));
