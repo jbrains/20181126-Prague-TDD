@@ -18,8 +18,12 @@ public class FindPriceInMemoryCatalogTest {
     }
 
     private Catalog catalogWith(String barcode, Price matchingPrice) {
-        return new InMemoryCatalog(
-                Collections.singletonMap(barcode, matchingPrice));
+        return new InMemoryCatalog(new HashMap<String, Price>() {{
+            put("not " + barcode, Price.euroCents(0));
+            put(barcode, matchingPrice);
+            put("certainly not " + barcode, Price.euroCents(0));
+            put("I told you, not " + barcode + ", you idiot", Price.euroCents(0));
+        }});
     }
 
     @Test
