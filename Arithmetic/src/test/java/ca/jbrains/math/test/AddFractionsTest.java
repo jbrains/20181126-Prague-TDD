@@ -11,13 +11,13 @@ public class AddFractionsTest {
     }
 
     @Test
-    public void notZeroPlusZero() throws Exception {
+    public void notZeroIntegerPlusZero() throws Exception {
         Fraction sum = new Fraction(1).plus(new Fraction(0));
         Assert.assertEquals(1, sum.intValue());
     }
 
     @Test
-    public void zeroPlusNotZero() throws Exception {
+    public void zeroPlusNotZeroInteger() throws Exception {
         Fraction sum = new Fraction(0).plus(new Fraction(4));
         Assert.assertEquals(4, sum.intValue());
     }
