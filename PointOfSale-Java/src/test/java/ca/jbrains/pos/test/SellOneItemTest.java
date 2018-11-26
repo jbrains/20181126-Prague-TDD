@@ -49,19 +49,20 @@ public class SellOneItemTest {
 
     public static class Sale {
         private Display display;
+        private final Map<String, String> pricesByBarcode;
 
         public Sale(Display display) {
             this.display = display;
-        }
-
-        public void onBarcode(String barcode) {
-            final Map<String, String> pricesByBarcode = new HashMap<String, String>() {{
+            pricesByBarcode = new HashMap<String, String>() {{
                 put("12345", "CZK 780.00");
                 put("23456", "CZK 1249.00");
             }};
+        }
 
-            if ("".equals(barcode))
+        public void onBarcode(String barcode) {
+            if ("".equals(barcode)) {
                 display.setText("Scanning error: empty barcode");
+            }
             else {
                 final String priceAsText = pricesByBarcode.get(barcode);
                 if (priceAsText != null)
