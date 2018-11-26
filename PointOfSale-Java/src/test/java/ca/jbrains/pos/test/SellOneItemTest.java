@@ -72,10 +72,10 @@ public class SellOneItemTest {
             }
 
             final String priceAsText = findPrice(barcode);
-            if (priceAsText != null) {
-                displayPrice(priceAsText);
-            } else {
+            if (priceAsText == null) {
                 displayProductNotFoundMessage(barcode);
+            } else {
+                displayPrice(priceAsText);
             }
         }
 
