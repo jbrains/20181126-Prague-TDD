@@ -7,32 +7,31 @@ public class AddFractionsTest {
     @Test
     public void zeroPlusZero() throws Exception {
         Fraction sum = new Fraction(0).plus(new Fraction(0));
-        Assert.assertEquals(0, sum.intValue());
+        Assert.assertEquals(new Fraction(0), sum);
     }
 
     @Test
     public void notZeroIntegerPlusZero() throws Exception {
         Fraction sum = new Fraction(1).plus(new Fraction(0));
-        Assert.assertEquals(1, sum.intValue());
+        Assert.assertEquals(new Fraction(1), sum);
     }
 
     @Test
     public void zeroPlusNotZeroInteger() throws Exception {
         Fraction sum = new Fraction(0).plus(new Fraction(4));
-        Assert.assertEquals(4, sum.intValue());
+        Assert.assertEquals(new Fraction(4), sum);
     }
 
     @Test
     public void nonZeroIntegers() throws Exception {
         Fraction sum = new Fraction(3).plus(new Fraction(6));
-        Assert.assertEquals(9, sum.intValue());
+        Assert.assertEquals(new Fraction(9), sum);
     }
 
     @Test
     public void sameDenominators() throws Exception {
         Fraction sum = new Fraction(2, 7).plus(new Fraction(3, 7));
-        Assert.assertEquals(5, sum.getNumerator());
-        Assert.assertEquals(7, sum.getDenominator());
+        Assert.assertEquals(new Fraction(5, 7), sum);
     }
 
     public static class Fraction {
@@ -55,16 +54,20 @@ public class AddFractionsTest {
                 return new Fraction(this.numerator + other.numerator, this.denominator);
         }
 
-        public int intValue() {
-            return numerator;
+        @Override
+        public boolean equals(Object other) {
+            if (other instanceof Fraction) {
+                Fraction that = (Fraction) other;
+                return this.numerator * that.denominator
+                        == that.numerator * this.denominator;
+            } else {
+                return false;
+            }
         }
 
-        public int getNumerator() {
-            return numerator;
-        }
-
-        public int getDenominator() {
-            return denominator;
+        @Override
+        public int hashCode() {
+            return 762;
         }
     }
 }
