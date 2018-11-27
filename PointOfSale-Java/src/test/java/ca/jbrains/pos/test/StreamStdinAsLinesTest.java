@@ -22,6 +22,20 @@ public class StreamStdinAsLinesTest {
                 streamAsLines(new StringReader("::line::")));
     }
 
+    @Test
+    public void oneLineEndingInALineSeparator() throws Exception {
+        Assert.assertEquals(
+                Stream.of("::line::"),
+                streamAsLines(new StringReader("::line::" + System.lineSeparator())));
+    }
+
+    @Test
+    public void justALineSeparator() throws Exception {
+        Assert.assertEquals(
+                Stream.of(""),
+                streamAsLines(new StringReader(System.lineSeparator())));
+    }
+
     private Stream<String> streamAsLines(Reader source) {
         try {
             final String line = new BufferedReader(source).readLine();
