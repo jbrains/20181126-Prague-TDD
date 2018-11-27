@@ -37,13 +37,16 @@ public class StreamStdinAsLinesTest {
                 streamAsLines(new StringReader(System.lineSeparator())));
     }
 
+    @Test
+    public void severalLinesWithATrailingLineSeparator() throws Exception {
+        Assert.assertEquals(
+                Stream.of("::line 1::", "::line 2::", "::line 3::"),
+                streamAsLines(new StringReader(toMultilineText(List.of("::line 1::", "::line 2::", "::line 3::")))));
+
+    }
+
     private Stream<String> streamAsLines(Reader source) {
-        try {
-            final String line = new BufferedReader(source).readLine();
-            return line == null ? Stream.empty() : Stream.of(line);
-        } catch (IOException e) {
-            throw new RuntimeException("Reading commands from a Reader failed somehow.", e);
-        }
+        return Stream.ofAll(new BufferedReader(source).lines());
     }
 
     // CONTRACT Adds a trailing line separator to the entire "document".
