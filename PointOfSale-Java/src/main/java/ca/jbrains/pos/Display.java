@@ -1,6 +1,7 @@
 package ca.jbrains.pos;
 
 public class Display {
+    private final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat = new EnglishLanguageCzechRepublicMessageFormat();
     private String text;
 
     public String getText() {
@@ -8,14 +9,14 @@ public class Display {
     }
 
     public void displayProductNotFoundMessage(String barcode) {
-        this.text = String.format("Product not found: %s", barcode);
+        this.text = englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode);
     }
 
     public void displayPrice(String priceAsText) {
-        this.text = priceAsText;
+        this.text = englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText);
     }
 
     public void displayScannedEmptyBarcodeMessage() {
-        this.text = "Scanning error: empty barcode";
+        this.text = englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage();
     }
 }
