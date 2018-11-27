@@ -1,8 +1,13 @@
 package ca.jbrains.pos;
 
 public class Display {
-    private final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat = new EnglishLanguageCzechRepublicMessageFormat();
-    private final RenderTextInMemory renderTextInMemory = new RenderTextInMemory();
+    private final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat;
+    private final RenderTextInMemory renderTextInMemory;
+
+    public Display(final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat, final RenderTextInMemory renderTextInMemory) {
+        this.englishLanguageCzechRepublicMessageFormat = englishLanguageCzechRepublicMessageFormat;
+        this.renderTextInMemory = renderTextInMemory;
+    }
 
     public String getText() {
         return renderTextInMemory.getText();

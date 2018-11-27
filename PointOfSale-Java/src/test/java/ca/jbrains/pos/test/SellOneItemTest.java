@@ -1,8 +1,6 @@
 package ca.jbrains.pos.test;
 
-import ca.jbrains.pos.Catalog;
-import ca.jbrains.pos.Display;
-import ca.jbrains.pos.Sale;
+import ca.jbrains.pos.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +9,7 @@ import java.util.HashMap;
 public class SellOneItemTest {
     @Test
     public void productFound() throws Exception {
-        final Display display = new Display();
+        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), new RenderTextInMemory());
         final Sale sale = new Sale(new Catalog(new HashMap<String, String>() {{
             put("12345", "CZK 780.00");
             put("23456", "CZK 1249.00");
@@ -24,7 +22,7 @@ public class SellOneItemTest {
 
     @Test
     public void anotherProductFound() throws Exception {
-        final Display display = new Display();
+        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), new RenderTextInMemory());
         final Sale sale = new Sale(new Catalog(new HashMap<String, String>() {{
             put("12345", "CZK 780.00");
             put("23456", "CZK 1249.00");
@@ -37,7 +35,7 @@ public class SellOneItemTest {
 
     @Test
     public void productNotFound() throws Exception {
-        final Display display = new Display();
+        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), new RenderTextInMemory());
         final Sale sale = new Sale(new Catalog(new HashMap<String, String>() {{
             put("12345", "CZK 780.00");
             put("23456", "CZK 1249.00");
@@ -50,7 +48,7 @@ public class SellOneItemTest {
 
     @Test
     public void emptyBarcode() throws Exception {
-        final Display display = new Display();
+        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), new RenderTextInMemory());
         final Sale sale = new Sale(new Catalog(null), display);
 
         sale.onBarcode("");
