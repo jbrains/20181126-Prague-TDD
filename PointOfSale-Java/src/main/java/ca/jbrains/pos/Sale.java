@@ -12,16 +12,19 @@ public class Sale {
     }
 
     public void onBarcode(String barcode) {
+        renderTextInMemory.renderText(handleRequest(barcode));
+    }
+
+    public String handleRequest(String barcode) {
         if ("".equals(barcode)) {
-            renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage());
-            return;
+            return englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage();
         }
 
         final String priceAsText = catalog.findPrice(barcode);
         if (priceAsText == null) {
-            renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode));
+            return englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode);
         } else {
-            renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText));
+            return englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText);
         }
     }
 }
