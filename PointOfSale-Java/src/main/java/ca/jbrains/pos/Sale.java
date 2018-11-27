@@ -2,24 +2,26 @@ package ca.jbrains.pos;
 
 public class Sale {
     private final Catalog catalog;
-    private final Display display;
+    private final RenderTextInMemory renderTextInMemory;
+    private final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat;
 
     public Sale(Catalog catalog, Display display) {
         this.catalog = catalog;
-        this.display = display;
+        this.renderTextInMemory = display.renderTextInMemory;
+        this.englishLanguageCzechRepublicMessageFormat = display.englishLanguageCzechRepublicMessageFormat;
     }
 
     public void onBarcode(String barcode) {
         if ("".equals(barcode)) {
-            display.displayScannedEmptyBarcodeMessage();
+            renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage());
             return;
         }
 
         final String priceAsText = catalog.findPrice(barcode);
         if (priceAsText == null) {
-            display.displayProductNotFoundMessage(barcode);
+            renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode));
         } else {
-            display.displayPrice(priceAsText);
+            renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText));
         }
     }
 }

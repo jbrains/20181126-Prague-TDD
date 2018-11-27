@@ -1,8 +1,8 @@
 package ca.jbrains.pos;
 
 public class Display {
-    private final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat;
-    private final RenderTextInMemory renderTextInMemory;
+    public final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat;
+    public final RenderTextInMemory renderTextInMemory;
 
     public Display(final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat, final RenderTextInMemory renderTextInMemory) {
         this.englishLanguageCzechRepublicMessageFormat = englishLanguageCzechRepublicMessageFormat;
