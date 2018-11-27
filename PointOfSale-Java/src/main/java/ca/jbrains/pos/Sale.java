@@ -5,10 +5,10 @@ public class Sale {
     private final RenderTextInMemory renderTextInMemory;
     private final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat;
 
-    public Sale(Catalog catalog, Display display) {
+    public Sale(Catalog catalog, final RenderTextInMemory renderTextInMemory, final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat) {
         this.catalog = catalog;
-        this.renderTextInMemory = display.renderTextInMemory;
-        this.englishLanguageCzechRepublicMessageFormat = display.englishLanguageCzechRepublicMessageFormat;
+        this.renderTextInMemory = renderTextInMemory;
+        this.englishLanguageCzechRepublicMessageFormat = englishLanguageCzechRepublicMessageFormat;
     }
 
     public void onBarcode(String barcode) {

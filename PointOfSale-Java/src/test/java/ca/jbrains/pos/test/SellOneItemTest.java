@@ -10,19 +10,20 @@ import java.util.HashMap;
 public class SellOneItemTest {
 
     private RenderTextInMemory renderTextInMemory;
+    private EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat;
 
     @Before
     public void setUp() throws Exception {
         renderTextInMemory = new RenderTextInMemory();
+        englishLanguageCzechRepublicMessageFormat = new EnglishLanguageCzechRepublicMessageFormat();
     }
 
     @Test
     public void productFound() throws Exception {
-        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), renderTextInMemory);
         final Sale sale = new Sale(new Catalog(new HashMap<String, String>() {{
             put("12345", "CZK 780.00");
             put("23456", "CZK 1249.00");
-        }}), display);
+        }}), renderTextInMemory, englishLanguageCzechRepublicMessageFormat);
 
         sale.onBarcode("12345");
 
@@ -31,11 +32,10 @@ public class SellOneItemTest {
 
     @Test
     public void anotherProductFound() throws Exception {
-        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), renderTextInMemory);
         final Sale sale = new Sale(new Catalog(new HashMap<String, String>() {{
             put("12345", "CZK 780.00");
             put("23456", "CZK 1249.00");
-        }}), display);
+        }}), renderTextInMemory, englishLanguageCzechRepublicMessageFormat);
 
         sale.onBarcode("23456");
 
@@ -44,11 +44,10 @@ public class SellOneItemTest {
 
     @Test
     public void productNotFound() throws Exception {
-        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), renderTextInMemory);
         final Sale sale = new Sale(new Catalog(new HashMap<String, String>() {{
             put("12345", "CZK 780.00");
             put("23456", "CZK 1249.00");
-        }}), display);
+        }}), renderTextInMemory, englishLanguageCzechRepublicMessageFormat);
 
         sale.onBarcode("99999");
 
@@ -57,8 +56,7 @@ public class SellOneItemTest {
 
     @Test
     public void emptyBarcode() throws Exception {
-        final Display display = new Display(new EnglishLanguageCzechRepublicMessageFormat(), renderTextInMemory);
-        final Sale sale = new Sale(new Catalog(null), display);
+        final Sale sale = new Sale(new Catalog(null), renderTextInMemory, englishLanguageCzechRepublicMessageFormat);
 
         sale.onBarcode("");
 
