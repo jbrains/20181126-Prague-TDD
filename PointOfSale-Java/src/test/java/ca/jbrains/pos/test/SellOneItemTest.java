@@ -1,5 +1,8 @@
 package ca.jbrains.pos.test;
 
+import ca.jbrains.pos.Catalog;
+import ca.jbrains.pos.Display;
+import ca.jbrains.pos.Sale;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -53,49 +56,5 @@ public class SellOneItemTest {
         sale.onBarcode("");
 
         Assert.assertEquals("Scanning error: empty barcode", display.getText());
-    }
-
-    public static class Sale {
-        private final Catalog catalog;
-        private final Display display;
-
-        public Sale(Catalog catalog, Display display) {
-            this.catalog = catalog;
-            this.display = display;
-        }
-
-        public void onBarcode(String barcode) {
-            if ("".equals(barcode)) {
-                display.displayScannedEmptyBarcodeMessage();
-                return;
-            }
-
-            final String priceAsText = catalog.findPrice(barcode);
-            if (priceAsText == null) {
-                display.displayProductNotFoundMessage(barcode);
-            } else {
-                display.displayPrice(priceAsText);
-            }
-        }
-    }
-
-    public static class Display {
-        private String text;
-
-        public String getText() {
-            return text;
-        }
-
-        public void displayProductNotFoundMessage(String barcode) {
-            this.text = String.format("Product not found: %s", barcode);
-        }
-
-        public void displayPrice(String priceAsText) {
-            this.text = priceAsText;
-        }
-
-        public void displayScannedEmptyBarcodeMessage() {
-            this.text = "Scanning error: empty barcode";
-        }
     }
 }
