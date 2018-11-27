@@ -2,21 +2,21 @@ package ca.jbrains.pos;
 
 public class Display {
     private final EnglishLanguageCzechRepublicMessageFormat englishLanguageCzechRepublicMessageFormat = new EnglishLanguageCzechRepublicMessageFormat();
-    private String text;
+    private final RenderTextInMemory renderTextInMemory = new RenderTextInMemory();
 
     public String getText() {
-        return text;
+        return renderTextInMemory.getText();
     }
 
     public void displayProductNotFoundMessage(String barcode) {
-        this.text = englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode);
+        this.renderTextInMemory.setText(englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode));
     }
 
     public void displayPrice(String priceAsText) {
-        this.text = englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText);
+        this.renderTextInMemory.setText(englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText));
     }
 
     public void displayScannedEmptyBarcodeMessage() {
-        this.text = englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage();
+        this.renderTextInMemory.setText(englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage());
     }
 }
