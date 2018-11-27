@@ -9,10 +9,6 @@ public class Display {
         this.renderTextInMemory = renderTextInMemory;
     }
 
-    public String getText() {
-        return renderTextInMemory.getText();
-    }
-
     public void displayProductNotFoundMessage(String barcode) {
         this.renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode));
     }
