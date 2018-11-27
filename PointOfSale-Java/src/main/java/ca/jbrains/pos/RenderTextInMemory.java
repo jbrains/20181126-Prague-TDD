@@ -7,7 +7,7 @@ public class RenderTextInMemory {
         return text;
     }
 
-    public void setText(String text) {
+    public void renderText(String text) {
         this.text = text;
     }
 }

@@ -9,14 +9,14 @@ public class Display {
     }
 
     public void displayProductNotFoundMessage(String barcode) {
-        this.renderTextInMemory.setText(englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode));
+        this.renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatProductNotFoundMessage(barcode));
     }
 
     public void displayPrice(String priceAsText) {
-        this.renderTextInMemory.setText(englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText));
+        this.renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatProductFoundMessage(priceAsText));
     }
 
     public void displayScannedEmptyBarcodeMessage() {
-        this.renderTextInMemory.setText(englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage());
+        this.renderTextInMemory.renderText(englishLanguageCzechRepublicMessageFormat.formatScannedEmptyBarcodeMessage());
     }
 }
