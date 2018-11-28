@@ -3,6 +3,7 @@ package ca.jbrains.pos.test;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,12 @@ public class FindPriceInMemoryCatalogTest {
             put("::barcode::", matchingPrice);
         }});
         Assert.assertEquals(matchingPrice, catalog.findPrice("::barcode::"));
+    }
+
+    @Test
+    public void productNotFound() throws Exception {
+        final InMemoryCatalog catalog = new InMemoryCatalog(Collections.emptyMap());
+        Assert.assertEquals(null, catalog.findPrice("::missing barcode::"));
     }
 
     public static class InMemoryCatalog {
