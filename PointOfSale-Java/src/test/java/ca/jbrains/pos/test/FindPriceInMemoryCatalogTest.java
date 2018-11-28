@@ -1,8 +1,5 @@
 package ca.jbrains.pos.test;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,13 +9,20 @@ public class FindPriceInMemoryCatalogTest extends FindPriceInCatalogContract {
     @Override
     protected Catalog catalogWith(final String barcode, Price matchingPrice) {
         return new InMemoryCatalog(new HashMap<String, Price>() {{
+            put("not " + barcode, Price.koruny(0));
             put(barcode, matchingPrice);
+            put("certainly not " + barcode, Price.koruny(0));
+            put("I told you, not " + barcode + ", you idiot.", Price.koruny(0));
         }});
     }
 
     @Override
-    protected Catalog emptyCatalog() {
-        return new InMemoryCatalog(Collections.emptyMap());
+    protected Catalog catalogWithout(String barcodeToAvoid) {
+        return new InMemoryCatalog(new HashMap<String, Price>() {{
+            put("not " + barcodeToAvoid, Price.koruny(0));
+            put("certainly not " + barcodeToAvoid, Price.koruny(0));
+            put("I told you, not " + barcodeToAvoid + ", you idiot.", Price.koruny(0));
+        }});
     }
 
     public static class InMemoryCatalog implements Catalog {

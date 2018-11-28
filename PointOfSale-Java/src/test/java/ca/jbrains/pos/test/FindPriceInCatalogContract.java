@@ -13,11 +13,11 @@ public abstract class FindPriceInCatalogContract {
 
     @Test
     public void productNotFound() throws Exception {
-        final Catalog catalog = emptyCatalog();
+        final Catalog catalog = catalogWithout("::missing barcode::");
         Assert.assertEquals(null, catalog.findPrice("::missing barcode::"));
     }
 
     protected abstract Catalog catalogWith(String barcode, Price matchingPrice);
 
-    protected abstract Catalog emptyCatalog();
+    protected abstract Catalog catalogWithout(String barcodeToAvoid);
 }
