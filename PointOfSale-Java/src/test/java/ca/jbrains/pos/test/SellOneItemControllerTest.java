@@ -1,14 +1,22 @@
 package ca.jbrains.pos.test;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class SellOneItemControllerTest {
+
+    private Catalog catalog;
+    private Display display;
+
+    @Before
+    public void createCollaborators() {
+        catalog = Mockito.mock(Catalog.class);
+        display = Mockito.mock(Display.class);
+    }
+
     @Test
     public void productFound() throws Exception {
-        final Catalog catalog = Mockito.mock(Catalog.class);
-        final Display display = Mockito.mock(Display.class);
-
         final Price matchingPrice = Price.koruny(180);
 
         Mockito.when(catalog.findPrice("::barcode::")).thenReturn(matchingPrice);
@@ -20,9 +28,6 @@ public class SellOneItemControllerTest {
 
     @Test
     public void productNotFound() throws Exception {
-        final Catalog catalog = Mockito.mock(Catalog.class);
-        final Display display = Mockito.mock(Display.class);
-
         Mockito.when(catalog.findPrice("::barcode::")).thenReturn(null);
 
         new SellOneItemController(catalog, display).onBarcode("::missing barcode::");
@@ -32,9 +37,6 @@ public class SellOneItemControllerTest {
 
     @Test
     public void emptyBarcode() throws Exception {
-        final Catalog catalog = Mockito.mock(Catalog.class);
-        final Display display = Mockito.mock(Display.class);
-
         new SellOneItemController(catalog, display).onBarcode("");
 
         Mockito.verify(display).displayScannedEmptyBarcodeMessage();
