@@ -37,7 +37,7 @@ public class SellOneItemControllerTest {
 
     @Test
     public void emptyBarcode() throws Exception {
-        new SellOneItemController(catalog, display).onBarcode("");
+        new SellOneItemController(null, display).onBarcode("");
 
         Mockito.verify(display).displayScannedEmptyBarcodeMessage();
     }
@@ -78,9 +78,4 @@ public class SellOneItemControllerTest {
         }
     }
 
-    public static class Price {
-        public static Price koruny(int korunyValue) {
-            return new Price();
-        }
-    }
 }
