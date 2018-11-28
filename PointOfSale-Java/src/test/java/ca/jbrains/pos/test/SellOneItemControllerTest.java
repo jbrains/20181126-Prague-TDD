@@ -18,12 +18,26 @@ public class SellOneItemControllerTest {
         Mockito.verify(display).displayPrice(matchingPrice);
     }
 
+    @Test
+    public void productNotFound() throws Exception {
+        final Catalog catalog = Mockito.mock(Catalog.class);
+        final Display display = Mockito.mock(Display.class);
+
+        Mockito.when(catalog.findPrice("::barcode::")).thenReturn(null);
+
+        new SellOneItemController(catalog, display).onBarcode("::missing barcode::");
+
+        Mockito.verify(display).displayProductNotFoundMessage("::missing barcode::");
+    }
+
     interface Catalog {
         Price findPrice(String barcode);
     }
 
     interface Display {
         void displayPrice(Price price);
+
+        void displayProductNotFoundMessage(String barcodeNotFound);
     }
 
     public static class SellOneItemController {
@@ -36,7 +50,12 @@ public class SellOneItemControllerTest {
         }
 
         public void onBarcode(String barcode) {
-            display.displayPrice(catalog.findPrice(barcode));
+            final Price price = catalog.findPrice(barcode);
+            if (price == null) {
+                display.displayProductNotFoundMessage(barcode);
+            } else {
+                display.displayPrice(price);
+            }
         }
     }
 
